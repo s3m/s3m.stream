@@ -18,6 +18,10 @@ taxonomies = [
 highlight_code = true
 highlight_theme = "base16-ocean-dark"
 
+[languages.en]
+title =  "s3m"
+description = "A command-line tool for storing streams of data in s3 buckets"
+
 [languages.en.translations]
 about = "about"
 home = "home"
@@ -27,6 +31,7 @@ links = "links"
 next_page = "next page"
 last_page = "last page"
 date_format = "%d/%m/%y %h:%m"
+
 
 [extra.social]
 github = "s3m/s3m"
