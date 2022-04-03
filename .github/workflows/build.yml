@@ -1,0 +1,25 @@
+name: build
+
+on:
+  push:
+    branches:
+      - preview
+  pull_request:
+    branches:
+      - preview
+  workflow_dispatch:
+
+jobs:
+  build:
+    name: build zola
+    runs-on: ubuntu-latest
+    steps:
+      - name: checkout
+        uses: actions/checkout@v2
+        with:
+          ref: preview
+
+      - name: build
+        uses: shalzz/zola-deploy-action@master
+        env:
+          BUILD_ONLY: true

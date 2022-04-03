@@ -1,0 +1,36 @@
+# The URL the site will be built for
+base_url = "https://s3m.stream"
+default_language = "en"
+description = "A command-line tool for storing streams of data in s3 buckets."
+theme = "anatole-zola"
+title = "s3m"
+
+build_search_index = false
+compile_sass = true
+generate_feed = true
+highlight_code = true
+
+taxonomies = [
+    {name = "tags"},
+]
+
+[markdown]
+highlight_code = true
+highlight_theme = "base16-ocean-dark"
+
+[languages.en.translations]
+about = "about"
+home = "home"
+tags = "tags"
+archive = "archive"
+links = "links"
+next_page = "next page"
+last_page = "last page"
+date_format = "%d/%m/%y %h:%m"
+
+[extra.social]
+github = "s3m"
+
+[extra.show]
+tags = true
+links = true
