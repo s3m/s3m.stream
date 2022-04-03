@@ -29,7 +29,7 @@ last_page = "last page"
 date_format = "%d/%m/%y %h:%m"
 
 [extra.social]
-github = "s3m"
+github = "s3m/s3m"
 
 [extra.show]
 tags = true
