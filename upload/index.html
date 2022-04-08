@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1, viewport-fit=cover">
+  <link rel="apple-touch-icon-precomposed" sizes="144x144" href="https://s3m.stream/images/apple-touch-icon-144x144.png"/>
+  <link rel="apple-touch-icon-precomposed" sizes="120x120" href="https://s3m.stream/images/apple-touch-icon-120x120.png"/>
+  <link rel="apple-touch-icon-precomposed" sizes="72x72" href="https://s3m.stream/images/apple-touch-icon-72x72.png"/>
+  <link rel="apple-touch-icon-precomposed" sizes="57x57" href="https://s3m.stream/images/apple-touch-icon-57x57.png"/>
+  <link rel="short icon" href="https://s3m.stream/images/favicon.ico" type="image/x-icon"/>
+  <link rel="stylesheet" href="https://s3m.stream/style.css">
+  <link href="https://cdn.bootcdn.net/ajax/libs/font-awesome/5.15.1/css/all.min.css" rel="stylesheet">
+  <title>s3m • upload</title>
+  
+
+  
+  
+</head>
+<body>
+<div id="sidebar" class="animated fadeInDown">
+  <div class="logo-title">
+    <div class="title">
+      <img src=https://s3m.stream/images/logo@2x.png style="width:127px;" alt="logo"/>
+      <h3><a href="https://s3m.stream/">s3m</a></h3>
+      <div class="description">
+        <p>A command-line tool for storing streams of data in s3 buckets</p>
+      </div>
+    </div>
+  </div>
+  <ul class="social-links"><li><a href="https://github.com/s3m&#x2F;s3m"><i class="fab fa-github"></i></a></li>
+    
+  </ul>
+  <div class="footer">
+    
+    <span>Designed by </span><a href="https://www.caicai.me">CaiCai</a>
+    <div class="by_zola"><a href="https://www.getzola.org/" target="_blank">Proudly published with Zola!</a></div>
+    
+  </div>
+</div>
+<div id="main">
+  <div class="page-top animated fadeInDown">
+    <div class="nav">
+      <li><a  href="https://s3m.stream/">home</a></li><li><a  href="https://s3m.stream/about/">about</a></li><li><a  href="https://s3m.stream/tags">tags</a></li><li><a  href="https://s3m.stream/archive/">archive</a></li><li><a  href="https://s3m.stream/links/">links</a></li></div>
+    <div class="information">
+      <div class="back_btn">
+        <li><a onclick="window.history.go(-1)" ><i class="fas fa-chevron-left"></i></a></li>
+      </div>
+      <div class="avatar"><img src="https://s3m.stream/images/avatar.png"></div>
+    </div>
+  </div>
+  <div class="autopagerize_page_element">
+    <div class="content">
+    
+<article class="post animated fadeInDown">
+  <h1><a href="https:&#x2F;&#x2F;s3m.stream&#x2F;upload&#x2F;">upload</a></h1>
+  
+  <div class="post-content"><p>To upload a file to an s3 bucket:</p>
+<pre data-lang="sh" style="background-color:#2b303b;color:#c0c5ce;" class="language-sh "><code class="language-sh" data-lang="sh"><span style="color:#bf616a;">s3m</span><span> /path_to/file &lt;s3 provider&gt;/&lt;bucket&gt;/file
+</span></code></pre>
+<p>For example if using this <code>~/.s3m/config.yml</code>:</p>
+<pre data-lang="yaml" style="background-color:#2b303b;color:#c0c5ce;" class="language-yaml "><code class="language-yaml" data-lang="yaml"><span>---
+</span><span style="color:#bf616a;">hosts</span><span>:
+</span><span>  </span><span style="color:#bf616a;">aws</span><span>:
+</span><span>    </span><span style="color:#bf616a;">region</span><span>: </span><span style="color:#a3be8c;">eu-central-1
+</span><span>    </span><span style="color:#bf616a;">access_key</span><span>: </span><span style="color:#a3be8c;">ACCESSKEY
+</span><span>    </span><span style="color:#bf616a;">secret_key</span><span>: </span><span style="color:#a3be8c;">SECRETKEY
+</span></code></pre>
+<p>To upload a file to <code>aws</code> to a bucket named <code>backup</code> you could do:</p>
+<pre data-lang="sh" style="background-color:#2b303b;color:#c0c5ce;" class="language-sh "><code class="language-sh" data-lang="sh"><span style="color:#bf616a;">s3m</span><span> /path/to/file aws/backup/file
+</span></code></pre>
+<blockquote>
+<p><code>aws</code> is the S3 provider, <code>backup</code> is the bucket</p>
+</blockquote>
+<h2 id="pipe-stdin">PIPE/STDIN</h2>
+<p>You could pipe the output of your application or a file for example:</p>
+<pre data-lang="sh" style="background-color:#2b303b;color:#c0c5ce;" class="language-sh "><code class="language-sh" data-lang="sh"><span style="color:#bf616a;">mysqldump </span><span>| </span><span style="color:#bf616a;">xz -c </span><span>| </span><span style="color:#bf616a;">s3m --pipe </span><span>&lt;s3 provider&gt;/&lt;bucket&gt;/dump.sql
+</span></code></pre>
+<blockquote>
+<p>The <code>s3 provider</code> could be <code>aws</code> from the previous example.</p>
+</blockquote>
+<h3 id="acl">ACL</h3>
+<p>When streaming, a <a href="https://docs.aws.amazon.com/AmazonS3/latest/userguide/acl-overview.html#canned-acl">canned ACL</a>
+for the object can be defined if using option <code>-a/--acl &lt;acl&gt;</code>, for example to make the object public:</p>
+<pre data-lang="sh" style="background-color:#2b303b;color:#c0c5ce;" class="language-sh "><code class="language-sh" data-lang="sh"><span style="color:#bf616a;">s3m</span><span> /path_to/file &lt;s3 provider&gt;/&lt;bucket&gt;/file</span><span style="color:#bf616a;"> -a</span><span> public-read
+</span></code></pre>
+<h3 id="metadata">Metadata</h3>
+<p>To add a custom, user-defined object metadata <code>x-amz-meta-*</code>, the option <code>-m/--meta</code> can be used, for example:</p>
+<pre data-lang="sh" style="background-color:#2b303b;color:#c0c5ce;" class="language-sh "><code class="language-sh" data-lang="sh"><span style="color:#bf616a;">s3m</span><span> /path_to/file &lt;s3 provider&gt;/&lt;bucket&gt;/file</span><span style="color:#bf616a;"> -m </span><span>&quot;</span><span style="color:#a3be8c;">key1=value1;key2=value2</span><span>&quot;
+</span></code></pre>
+<p>This will create the object with the following metadata:</p>
+<pre data-lang="yaml" style="background-color:#2b303b;color:#c0c5ce;" class="language-yaml "><code class="language-yaml" data-lang="yaml"><span style="color:#bf616a;">x-amz-meta-key1</span><span>: </span><span style="color:#a3be8c;">value1
+</span><span style="color:#bf616a;">x-amz-meta-key2</span><span>: </span><span style="color:#a3be8c;">value2
+</span></code></pre>
+</div>
+  <div class="post-footer">
+    <div class="meta">
+      <div class="info">
+        
+          <i class="far fa-sun"></i><span class="date">03&#x2F;04&#x2F;22 Apr:04</span>
+        
+        
+          <i class="fas fa-tags"></i>
+          
+            <a class="tag" href="https://s3m.stream/tags/put">&nbsp;put</a>
+          
+            <a class="tag" href="https://s3m.stream/tags/pipe">&nbsp;pipe</a>
+          
+            <a class="tag" href="https://s3m.stream/tags/acl">&nbsp;acl</a>
+          
+            <a class="tag" href="https://s3m.stream/tags/meta">&nbsp;meta</a>
+          
+        
+      </div>
+    </div>
+  </div>
+</article>
+<div class="share">
+  <div class="weibo">
+    <a class="fab fa-weibo" href="javascript:void((function(s,d,e){try{}catch(e){}var f='http://service.weibo.com/share/share.php?',u=d.location.href,p=['url=',e(u),'&title=',e(d.title),'&appkey=2924220432'].join('');function a(){if(!window.open([f,p].join(''),'mb',['toolbar=0,status=0,resizable=1,width=620,height=450,left=',(s.width-620)/2,',top=',(s.height-450)/2].join('')))u.href=[f,p].join('');};if(/Firefox/.test(navigator.userAgent)){setTimeout(a,0)}else{a()}})(screen,document,encodeURIComponent));"></a>
+  </div>
+  <div class="twitter">
+    <a class="fab fa-twitter" href="http://twitter.com/share?text=upload&url=https:&#x2F;&#x2F;s3m.stream&#x2F;upload&hashtags=put,pipe,acl,meta"></a>
+  </div>
+</div>
+
+
+
+
+
+
+
+
+
+    </div>
+  </div>
+</div>
+</body>
+</html>

@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1, viewport-fit=cover">
+  <link rel="apple-touch-icon-precomposed" sizes="144x144" href="https://s3m.stream/images/apple-touch-icon-144x144.png"/>
+  <link rel="apple-touch-icon-precomposed" sizes="120x120" href="https://s3m.stream/images/apple-touch-icon-120x120.png"/>
+  <link rel="apple-touch-icon-precomposed" sizes="72x72" href="https://s3m.stream/images/apple-touch-icon-72x72.png"/>
+  <link rel="apple-touch-icon-precomposed" sizes="57x57" href="https://s3m.stream/images/apple-touch-icon-57x57.png"/>
+  <link rel="short icon" href="https://s3m.stream/images/favicon.ico" type="image/x-icon"/>
+  <link rel="stylesheet" href="https://s3m.stream/style.css">
+  <link href="https://cdn.bootcdn.net/ajax/libs/font-awesome/5.15.1/css/all.min.css" rel="stylesheet">
+  <title>s3m • Example</title>
+  
+
+  
+  
+</head>
+<body>
+<div id="sidebar" class="animated fadeInDown">
+  <div class="logo-title">
+    <div class="title">
+      <img src=https://s3m.stream/images/logo@2x.png style="width:127px;" alt="logo"/>
+      <h3><a href="https://s3m.stream/">s3m</a></h3>
+      <div class="description">
+        <p>A command-line tool for storing streams of data in s3 buckets</p>
+      </div>
+    </div>
+  </div>
+  <ul class="social-links"><li><a href="https://github.com/s3m&#x2F;s3m"><i class="fab fa-github"></i></a></li>
+    
+  </ul>
+  <div class="footer">
+    
+    <span>Designed by </span><a href="https://www.caicai.me">CaiCai</a>
+    <div class="by_zola"><a href="https://www.getzola.org/" target="_blank">Proudly published with Zola!</a></div>
+    
+  </div>
+</div>
+<div id="main">
+  <div class="page-top animated fadeInDown">
+    <div class="nav">
+      <li><a  href="https://s3m.stream/">home</a></li><li><a  href="https://s3m.stream/about/">about</a></li><li><a  href="https://s3m.stream/tags">tags</a></li><li><a  href="https://s3m.stream/archive/">archive</a></li><li><a  href="https://s3m.stream/links/">links</a></li></div>
+    <div class="information">
+      <div class="back_btn">
+        <li><a onclick="window.history.go(-1)" ><i class="fas fa-chevron-left"></i></a></li>
+      </div>
+      <div class="avatar"><img src="https://s3m.stream/images/avatar.png"></div>
+    </div>
+  </div>
+  <div class="autopagerize_page_element">
+    <div class="content">
+    
+<article class="post animated fadeInDown">
+  <h1><a href="https:&#x2F;&#x2F;s3m.stream&#x2F;how&#x2F;">Example</a></h1>
+  
+  <div class="post-content"><p>To stream a file simply do:</p>
+<pre data-lang="sh" style="background-color:#2b303b;color:#c0c5ce;" class="language-sh "><code class="language-sh" data-lang="sh"><span style="color:#bf616a;">s3m</span><span> /path/to/your/file aws/bucket/destination
+</span><span>                        |     |      |
+</span><span>                        |     |      </span><span style="color:#bf616a;">Path</span><span> to store the file
+</span><span>                        |     </span><span style="color:#bf616a;">Bucket
+</span><span>                        </span><span style="color:#bf616a;">Host</span><span> (S3 provider)
+</span></code></pre>
+<p>For that to work you need to previously configure <strong>s3m</strong> <code>config.yml</code> or pass the
+configuration file using option <code>-c/--config</code></p>
+<h2 id="the-config-yml">The config.yml</h2>
+<p>The default location is <code>$HOME/.s3m/config.yml</code></p>
+<p>The format of the file is:</p>
+<pre style="background-color:#2b303b;color:#c0c5ce;"><code><span>---
+</span><span>hosts:
+</span><span>  provider_name:
+</span><span>    region: &lt;region&gt;
+</span><span>    endpoint: &lt;https://endpoint&gt;
+</span><span>    access_key: &lt;access_key&gt;
+</span><span>    secret_key: &lt;secret_key&gt;
+</span></code></pre>
+<p>For example if you want to use <strong>AWS</strong> S3 and <strong>Backblaze</strong>:</p>
+<pre data-lang="yaml" style="background-color:#2b303b;color:#c0c5ce;" class="language-yaml "><code class="language-yaml" data-lang="yaml"><span>---
+</span><span style="color:#bf616a;">hosts</span><span>:
+</span><span>  </span><span style="color:#bf616a;">aws</span><span>:
+</span><span>    </span><span style="color:#bf616a;">region</span><span>: </span><span style="color:#a3be8c;">eu-central-1
+</span><span>    </span><span style="color:#bf616a;">access_key</span><span>: </span><span style="color:#a3be8c;">ACCESSKEY
+</span><span>    </span><span style="color:#bf616a;">secret_key</span><span>: </span><span style="color:#a3be8c;">SECRETKEY
+</span><span>
+</span><span>  </span><span style="color:#bf616a;">backblaze</span><span>:
+</span><span>    </span><span style="color:#bf616a;">endpoint</span><span>: </span><span style="color:#a3be8c;">s3.us-west-001.backblazeb2.com
+</span><span>    </span><span style="color:#bf616a;">access_key</span><span>: </span><span style="color:#a3be8c;">ACCESSKEY
+</span><span>    </span><span style="color:#bf616a;">secret_key</span><span>: </span><span style="color:#a3be8c;">SECRETKEY
+</span></code></pre>
+<blockquote>
+<p>Notice the use of <code>endpoint</code> when there is no <code>region</code></p>
+</blockquote>
+<h2 id="how-it-works">How it works:</h2>
+<p><strong>s3m</strong> upload the files in different ways:</p>
+<ul>
+<li>If the input file is <strong>&lt;</strong> than the buffer size, the file will be uploaded in one-show (not capable of resuming).</li>
+<li>if the input file is <strong>&gt;</strong> than the buffer size, the file will be uploaded in multi parts and in it can be resumed.</li>
+</ul>
+<blockquote>
+<p>The buffer size by default is 10MB and it can be changed using the option <code>-b</code>.</p>
+</blockquote>
+<p><strong>s3m</strong> calculates the buffer size automatically, but if required and if you
+know already the file size, you can choose a buffer size, based on your needs.</p>
+<p>For example, if you would like to upload 5TB (the current max object size) you
+will need a buffer size of <strong>512MB</strong>:</p>
+<pre data-lang="sh" style="background-color:#2b303b;color:#c0c5ce;" class="language-sh "><code class="language-sh" data-lang="sh"><span style="color:#bf616a;">s3m</span><span> /path_to/5TB.file &lt;s3&gt;/&lt;bucket&gt;/file</span><span style="color:#bf616a;"> -b</span><span> 536870912
+</span></code></pre>
+<p>If using buffer of <strong>30MB</strong> you could upload up to 300GB:</p>
+<pre data-lang="sh" style="background-color:#2b303b;color:#c0c5ce;" class="language-sh "><code class="language-sh" data-lang="sh"><span style="color:#bf616a;">s3m</span><span> /path_to_max/300GB.file &lt;s3&gt;/&lt;bucket&gt;/file</span><span style="color:#bf616a;"> -b</span><span> 31457280
+</span></code></pre>
+<p>The current <a href="https://docs.aws.amazon.com/AmazonS3/latest/dev/qfacts.html">limits for AWS S3</a> are:</p>
+<ul>
+<li>Maximum object size: 5 TB</li>
+<li>Maximum number of parts per upload:  10,000</li>
+<li>Part size: 5 MB to 5 GB</li>
+</ul>
+<p>If you would like to upload up to 500GB objects:</p>
+<pre style="background-color:#2b303b;color:#c0c5ce;"><code><span>524288000000     / 10000  = 52428800 (50MB buffer size)
+</span><span>(500GB in bytes) / (max number of parts)
+</span></code></pre>
+<p>The buffer size to use <strong>50MB</strong>:</p>
+<pre data-lang="sh" style="background-color:#2b303b;color:#c0c5ce;" class="language-sh "><code class="language-sh" data-lang="sh"><span style="color:#bf616a;">s3m</span><span> /path_to_max/500GB.file &lt;s3&gt;/&lt;bucket&gt;/file</span><span style="color:#bf616a;"> -b</span><span> 52428800
+</span></code></pre>
+<blockquote>
+<p>As mentioned, this is optional since <strong>s3m</strong> calculates this automatically</p>
+</blockquote>
+<p>When the size of the input is known in advance, a checksum of the file is
+created before unloading the file in order to keep track of the uploaded
+objects, this helps to prevent uploading the same file twice besides &quot;keeping
+state&quot; when uploading in multi parts so that if the upload gets interrupted it
+can be resumed later.</p>
+<p>To clean up the local database you could use the option <code>--clean</code>, for example:</p>
+<pre data-lang="sh" style="background-color:#2b303b;color:#c0c5ce;" class="language-sh "><code class="language-sh" data-lang="sh"><span style="color:#bf616a;">s3m --clean
+</span></code></pre>
+<p>Currently, there is no checksum when piping (option <code>-p/--pipe</code>) / sending the
+file via STDIN.</p>
+</div>
+  <div class="post-footer">
+    <div class="meta">
+      <div class="info">
+        
+          <i class="far fa-sun"></i><span class="date">03&#x2F;04&#x2F;22 Apr:04</span>
+        
+        
+          <i class="fas fa-tags"></i>
+          
+            <a class="tag" href="https://s3m.stream/tags/how">&nbsp;how</a>
+          
+            <a class="tag" href="https://s3m.stream/tags/buffer">&nbsp;buffer</a>
+          
+            <a class="tag" href="https://s3m.stream/tags/config">&nbsp;config</a>
+          
+        
+      </div>
+    </div>
+  </div>
+</article>
+<div class="share">
+  <div class="weibo">
+    <a class="fab fa-weibo" href="javascript:void((function(s,d,e){try{}catch(e){}var f='http://service.weibo.com/share/share.php?',u=d.location.href,p=['url=',e(u),'&title=',e(d.title),'&appkey=2924220432'].join('');function a(){if(!window.open([f,p].join(''),'mb',['toolbar=0,status=0,resizable=1,width=620,height=450,left=',(s.width-620)/2,',top=',(s.height-450)/2].join('')))u.href=[f,p].join('');};if(/Firefox/.test(navigator.userAgent)){setTimeout(a,0)}else{a()}})(screen,document,encodeURIComponent));"></a>
+  </div>
+  <div class="twitter">
+    <a class="fab fa-twitter" href="http://twitter.com/share?text=Example&url=https:&#x2F;&#x2F;s3m.stream&#x2F;how&hashtags=how,buffer,config"></a>
+  </div>
+</div>
+
+
+
+
+
+
+
+
+
+    </div>
+  </div>
+</div>
+</body>
+</html>

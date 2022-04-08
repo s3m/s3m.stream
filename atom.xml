@@ -1,0 +1,299 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom" xml:lang="en">
+	<title>s3m</title>
+	<subtitle>A command-line tool for storing streams of data in s3 buckets</subtitle>
+	<link href="https://s3m.stream/atom.xml" rel="self" type="application/atom+xml"/>
+  <link href="https://s3m.stream"/>
+	<generator uri="https://www.getzola.org/">Zola</generator>
+	<updated>2022-04-03T11:45:10+00:00</updated>
+	<id>https://s3m.stream/atom.xml</id>
+	<entry xml:lang="en">
+		<title>Example</title>
+		<published>2022-04-03T11:45:10+00:00</published>
+		<updated>2022-04-03T11:45:10+00:00</updated>
+		<link href="https://s3m.stream/how/" type="text/html"/>
+		<id>https://s3m.stream/how/</id>
+		<content type="html">&lt;p&gt;To stream a file simply do:&lt;&#x2F;p&gt;
+&lt;pre data-lang=&quot;sh&quot; style=&quot;background-color:#2b303b;color:#c0c5ce;&quot; class=&quot;language-sh &quot;&gt;&lt;code class=&quot;language-sh&quot; data-lang=&quot;sh&quot;&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;s3m&lt;&#x2F;span&gt;&lt;span&gt; &#x2F;path&#x2F;to&#x2F;your&#x2F;file aws&#x2F;bucket&#x2F;destination
+&lt;&#x2F;span&gt;&lt;span&gt;                        |     |      |
+&lt;&#x2F;span&gt;&lt;span&gt;                        |     |      &lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;Path&lt;&#x2F;span&gt;&lt;span&gt; to store the file
+&lt;&#x2F;span&gt;&lt;span&gt;                        |     &lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;Bucket
+&lt;&#x2F;span&gt;&lt;span&gt;                        &lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;Host&lt;&#x2F;span&gt;&lt;span&gt; (S3 provider)
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;p&gt;For that to work you need to previously configure &lt;strong&gt;s3m&lt;&#x2F;strong&gt; &lt;code&gt;config.yml&lt;&#x2F;code&gt; or pass the
+configuration file using option &lt;code&gt;-c&#x2F;--config&lt;&#x2F;code&gt;&lt;&#x2F;p&gt;
+&lt;h2 id=&quot;the-config-yml&quot;&gt;The config.yml&lt;&#x2F;h2&gt;
+&lt;p&gt;The default location is &lt;code&gt;$HOME&#x2F;.s3m&#x2F;config.yml&lt;&#x2F;code&gt;&lt;&#x2F;p&gt;
+&lt;p&gt;The format of the file is:&lt;&#x2F;p&gt;
+&lt;pre style=&quot;background-color:#2b303b;color:#c0c5ce;&quot;&gt;&lt;code&gt;&lt;span&gt;---
+&lt;&#x2F;span&gt;&lt;span&gt;hosts:
+&lt;&#x2F;span&gt;&lt;span&gt;  provider_name:
+&lt;&#x2F;span&gt;&lt;span&gt;    region: &amp;lt;region&amp;gt;
+&lt;&#x2F;span&gt;&lt;span&gt;    endpoint: &amp;lt;https:&#x2F;&#x2F;endpoint&amp;gt;
+&lt;&#x2F;span&gt;&lt;span&gt;    access_key: &amp;lt;access_key&amp;gt;
+&lt;&#x2F;span&gt;&lt;span&gt;    secret_key: &amp;lt;secret_key&amp;gt;
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;p&gt;For example if you want to use &lt;strong&gt;AWS&lt;&#x2F;strong&gt; S3 and &lt;strong&gt;Backblaze&lt;&#x2F;strong&gt;:&lt;&#x2F;p&gt;
+&lt;pre data-lang=&quot;yaml&quot; style=&quot;background-color:#2b303b;color:#c0c5ce;&quot; class=&quot;language-yaml &quot;&gt;&lt;code class=&quot;language-yaml&quot; data-lang=&quot;yaml&quot;&gt;&lt;span&gt;---
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;hosts&lt;&#x2F;span&gt;&lt;span&gt;:
+&lt;&#x2F;span&gt;&lt;span&gt;  &lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;aws&lt;&#x2F;span&gt;&lt;span&gt;:
+&lt;&#x2F;span&gt;&lt;span&gt;    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;region&lt;&#x2F;span&gt;&lt;span&gt;: &lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;eu-central-1
+&lt;&#x2F;span&gt;&lt;span&gt;    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;access_key&lt;&#x2F;span&gt;&lt;span&gt;: &lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;ACCESSKEY
+&lt;&#x2F;span&gt;&lt;span&gt;    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;secret_key&lt;&#x2F;span&gt;&lt;span&gt;: &lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;SECRETKEY
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;span&gt;  &lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;backblaze&lt;&#x2F;span&gt;&lt;span&gt;:
+&lt;&#x2F;span&gt;&lt;span&gt;    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;endpoint&lt;&#x2F;span&gt;&lt;span&gt;: &lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;s3.us-west-001.backblazeb2.com
+&lt;&#x2F;span&gt;&lt;span&gt;    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;access_key&lt;&#x2F;span&gt;&lt;span&gt;: &lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;ACCESSKEY
+&lt;&#x2F;span&gt;&lt;span&gt;    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;secret_key&lt;&#x2F;span&gt;&lt;span&gt;: &lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;SECRETKEY
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;blockquote&gt;
+&lt;p&gt;Notice the use of &lt;code&gt;endpoint&lt;&#x2F;code&gt; when there is no &lt;code&gt;region&lt;&#x2F;code&gt;&lt;&#x2F;p&gt;
+&lt;&#x2F;blockquote&gt;
+&lt;h2 id=&quot;how-it-works&quot;&gt;How it works:&lt;&#x2F;h2&gt;
+&lt;p&gt;&lt;strong&gt;s3m&lt;&#x2F;strong&gt; upload the files in different ways:&lt;&#x2F;p&gt;
+&lt;ul&gt;
+&lt;li&gt;If the input file is &lt;strong&gt;&amp;lt;&lt;&#x2F;strong&gt; than the buffer size, the file will be uploaded in one-show (not capable of resuming).&lt;&#x2F;li&gt;
+&lt;li&gt;if the input file is &lt;strong&gt;&amp;gt;&lt;&#x2F;strong&gt; than the buffer size, the file will be uploaded in multi parts and in it can be resumed.&lt;&#x2F;li&gt;
+&lt;&#x2F;ul&gt;
+&lt;blockquote&gt;
+&lt;p&gt;The buffer size by default is 10MB and it can be changed using the option &lt;code&gt;-b&lt;&#x2F;code&gt;.&lt;&#x2F;p&gt;
+&lt;&#x2F;blockquote&gt;
+&lt;p&gt;&lt;strong&gt;s3m&lt;&#x2F;strong&gt; calculates the buffer size automatically, but if required and if you
+know already the file size, you can choose a buffer size, based on your needs.&lt;&#x2F;p&gt;
+&lt;p&gt;For example, if you would like to upload 5TB (the current max object size) you
+will need a buffer size of &lt;strong&gt;512MB&lt;&#x2F;strong&gt;:&lt;&#x2F;p&gt;
+&lt;pre data-lang=&quot;sh&quot; style=&quot;background-color:#2b303b;color:#c0c5ce;&quot; class=&quot;language-sh &quot;&gt;&lt;code class=&quot;language-sh&quot; data-lang=&quot;sh&quot;&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;s3m&lt;&#x2F;span&gt;&lt;span&gt; &#x2F;path_to&#x2F;5TB.file &amp;lt;s3&amp;gt;&#x2F;&amp;lt;bucket&amp;gt;&#x2F;file&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt; -b&lt;&#x2F;span&gt;&lt;span&gt; 536870912
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;p&gt;If using buffer of &lt;strong&gt;30MB&lt;&#x2F;strong&gt; you could upload up to 300GB:&lt;&#x2F;p&gt;
+&lt;pre data-lang=&quot;sh&quot; style=&quot;background-color:#2b303b;color:#c0c5ce;&quot; class=&quot;language-sh &quot;&gt;&lt;code class=&quot;language-sh&quot; data-lang=&quot;sh&quot;&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;s3m&lt;&#x2F;span&gt;&lt;span&gt; &#x2F;path_to_max&#x2F;300GB.file &amp;lt;s3&amp;gt;&#x2F;&amp;lt;bucket&amp;gt;&#x2F;file&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt; -b&lt;&#x2F;span&gt;&lt;span&gt; 31457280
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;p&gt;The current &lt;a href=&quot;https:&#x2F;&#x2F;docs.aws.amazon.com&#x2F;AmazonS3&#x2F;latest&#x2F;dev&#x2F;qfacts.html&quot;&gt;limits for AWS S3&lt;&#x2F;a&gt; are:&lt;&#x2F;p&gt;
+&lt;ul&gt;
+&lt;li&gt;Maximum object size: 5 TB&lt;&#x2F;li&gt;
+&lt;li&gt;Maximum number of parts per upload:  10,000&lt;&#x2F;li&gt;
+&lt;li&gt;Part size: 5 MB to 5 GB&lt;&#x2F;li&gt;
+&lt;&#x2F;ul&gt;
+&lt;p&gt;If you would like to upload up to 500GB objects:&lt;&#x2F;p&gt;
+&lt;pre style=&quot;background-color:#2b303b;color:#c0c5ce;&quot;&gt;&lt;code&gt;&lt;span&gt;524288000000     &#x2F; 10000  = 52428800 (50MB buffer size)
+&lt;&#x2F;span&gt;&lt;span&gt;(500GB in bytes) &#x2F; (max number of parts)
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;p&gt;The buffer size to use &lt;strong&gt;50MB&lt;&#x2F;strong&gt;:&lt;&#x2F;p&gt;
+&lt;pre data-lang=&quot;sh&quot; style=&quot;background-color:#2b303b;color:#c0c5ce;&quot; class=&quot;language-sh &quot;&gt;&lt;code class=&quot;language-sh&quot; data-lang=&quot;sh&quot;&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;s3m&lt;&#x2F;span&gt;&lt;span&gt; &#x2F;path_to_max&#x2F;500GB.file &amp;lt;s3&amp;gt;&#x2F;&amp;lt;bucket&amp;gt;&#x2F;file&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt; -b&lt;&#x2F;span&gt;&lt;span&gt; 52428800
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;blockquote&gt;
+&lt;p&gt;As mentioned, this is optional since &lt;strong&gt;s3m&lt;&#x2F;strong&gt; calculates this automatically&lt;&#x2F;p&gt;
+&lt;&#x2F;blockquote&gt;
+&lt;p&gt;When the size of the input is known in advance, a checksum of the file is
+created before unloading the file in order to keep track of the uploaded
+objects, this helps to prevent uploading the same file twice besides &amp;quot;keeping
+state&amp;quot; when uploading in multi parts so that if the upload gets interrupted it
+can be resumed later.&lt;&#x2F;p&gt;
+&lt;p&gt;To clean up the local database you could use the option &lt;code&gt;--clean&lt;&#x2F;code&gt;, for example:&lt;&#x2F;p&gt;
+&lt;pre data-lang=&quot;sh&quot; style=&quot;background-color:#2b303b;color:#c0c5ce;&quot; class=&quot;language-sh &quot;&gt;&lt;code class=&quot;language-sh&quot; data-lang=&quot;sh&quot;&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;s3m --clean
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;p&gt;Currently, there is no checksum when piping (option &lt;code&gt;-p&#x2F;--pipe&lt;&#x2F;code&gt;) &#x2F; sending the
+file via STDIN.&lt;&#x2F;p&gt;
+</content>
+	</entry>
+	<entry xml:lang="en">
+		<title>Install s3m</title>
+		<published>2022-04-03T11:45:03+00:00</published>
+		<updated>2022-04-03T11:45:03+00:00</updated>
+		<link href="https://s3m.stream/install/" type="text/html"/>
+		<id>https://s3m.stream/install/</id>
+		<content type="html">&lt;pre data-lang=&quot;sh&quot; style=&quot;background-color:#2b303b;color:#c0c5ce;&quot; class=&quot;language-sh &quot;&gt;&lt;code class=&quot;language-sh&quot; data-lang=&quot;sh&quot;&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;cargo&lt;&#x2F;span&gt;&lt;span&gt; install s3m
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;p&gt;To intall cargo&#x2F;rust use:&lt;&#x2F;p&gt;
+&lt;pre style=&quot;background-color:#2b303b;color:#c0c5ce;&quot;&gt;&lt;code&gt;&lt;span&gt;curl https:&#x2F;&#x2F;sh.rustup.rs -sSf | sh&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+</content>
+	</entry>
+	<entry xml:lang="en">
+		<title>config.yml</title>
+		<published>2022-04-03T11:44:30+00:00</published>
+		<updated>2022-04-03T11:44:30+00:00</updated>
+		<link href="https://s3m.stream/config/" type="text/html"/>
+		<id>https://s3m.stream/config/</id>
+		<content type="html">&lt;p&gt;By default &lt;strong&gt;s3m&lt;&#x2F;strong&gt; will try to use the file located at:&lt;&#x2F;p&gt;
+&lt;p&gt;The format of the file is:&lt;&#x2F;p&gt;
+&lt;pre style=&quot;background-color:#2b303b;color:#c0c5ce;&quot;&gt;&lt;code&gt;&lt;span&gt;---
+&lt;&#x2F;span&gt;&lt;span&gt;hosts:
+&lt;&#x2F;span&gt;&lt;span&gt;  provider_name:
+&lt;&#x2F;span&gt;&lt;span&gt;    region: &amp;lt;region&amp;gt;
+&lt;&#x2F;span&gt;&lt;span&gt;    endpoint: &amp;lt;https:&#x2F;&#x2F;endpoint&amp;gt;
+&lt;&#x2F;span&gt;&lt;span&gt;    access_key: &amp;lt;access_key&amp;gt;
+&lt;&#x2F;span&gt;&lt;span&gt;    secret_key: &amp;lt;secret_key&amp;gt;
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;p&gt;For example if you want to use &lt;strong&gt;AWS&lt;&#x2F;strong&gt; S3 and &lt;strong&gt;Backblaze&lt;&#x2F;strong&gt;:&lt;&#x2F;p&gt;
+&lt;pre data-lang=&quot;yaml&quot; style=&quot;background-color:#2b303b;color:#c0c5ce;&quot; class=&quot;language-yaml &quot;&gt;&lt;code class=&quot;language-yaml&quot; data-lang=&quot;yaml&quot;&gt;&lt;span&gt;---
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;hosts&lt;&#x2F;span&gt;&lt;span&gt;:
+&lt;&#x2F;span&gt;&lt;span&gt;  &lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;aws&lt;&#x2F;span&gt;&lt;span&gt;:
+&lt;&#x2F;span&gt;&lt;span&gt;    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;region&lt;&#x2F;span&gt;&lt;span&gt;: &lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;eu-central-1
+&lt;&#x2F;span&gt;&lt;span&gt;    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;access_key&lt;&#x2F;span&gt;&lt;span&gt;: &lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;ACCESSKEY
+&lt;&#x2F;span&gt;&lt;span&gt;    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;secret_key&lt;&#x2F;span&gt;&lt;span&gt;: &lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;SECRETKEY
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;span&gt;  &lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;backblaze&lt;&#x2F;span&gt;&lt;span&gt;:
+&lt;&#x2F;span&gt;&lt;span&gt;    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;endpoint&lt;&#x2F;span&gt;&lt;span&gt;: &lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;s3.us-west-001.backblazeb2.com
+&lt;&#x2F;span&gt;&lt;span&gt;    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;access_key&lt;&#x2F;span&gt;&lt;span&gt;: &lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;ACCESSKEY
+&lt;&#x2F;span&gt;&lt;span&gt;    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;secret_key&lt;&#x2F;span&gt;&lt;span&gt;: &lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;SECRETKEY
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;span&gt;  &lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;backup&lt;&#x2F;span&gt;&lt;span&gt;:
+&lt;&#x2F;span&gt;&lt;span&gt;    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;region&lt;&#x2F;span&gt;&lt;span&gt;: &lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;us-east-2
+&lt;&#x2F;span&gt;&lt;span&gt;    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;access_key&lt;&#x2F;span&gt;&lt;span&gt;: &lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;ACCESSKEY
+&lt;&#x2F;span&gt;&lt;span&gt;    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;secret_key&lt;&#x2F;span&gt;&lt;span&gt;: &lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;SECRETKEY
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;blockquote&gt;
+&lt;p&gt;Notice the use of &lt;code&gt;endpoint&lt;&#x2F;code&gt; when there is no &lt;code&gt;region&lt;&#x2F;code&gt;&lt;&#x2F;p&gt;
+&lt;&#x2F;blockquote&gt;
+&lt;p&gt;From the example, If neeed to save a file to the defined host &lt;code&gt;backup&lt;&#x2F;code&gt;:&lt;&#x2F;p&gt;
+&lt;pre data-lang=&quot;sh&quot; style=&quot;background-color:#2b303b;color:#c0c5ce;&quot; class=&quot;language-sh &quot;&gt;&lt;code class=&quot;language-sh&quot; data-lang=&quot;sh&quot;&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;s3m&lt;&#x2F;span&gt;&lt;span&gt; &#x2F;path&#x2F;to&#x2F;your&#x2F;file backup&#x2F;backups&#x2F;test.txt
+&lt;&#x2F;span&gt;&lt;span&gt;                        |     |      |
+&lt;&#x2F;span&gt;&lt;span&gt;                        |     |      &lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;text.txt&lt;&#x2F;span&gt;&lt;span&gt; will be the name of the file
+&lt;&#x2F;span&gt;&lt;span&gt;                        |     &lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;Bucket&lt;&#x2F;span&gt;&lt;span&gt; name: backups
+&lt;&#x2F;span&gt;&lt;span&gt;                        &lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;backup:&lt;&#x2F;span&gt;&lt;span&gt; defined in config.yml, uses AWS in region us-east-2
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;p&gt;The bucket &lt;code&gt;backups&lt;&#x2F;code&gt; should exist and the provided credentials should have rights to &lt;code&gt;PUT&lt;&#x2F;code&gt; objects&lt;&#x2F;p&gt;
+&lt;p&gt;Example of an AWS IAM user policy to allow all actions to specific bucket:&lt;&#x2F;p&gt;
+&lt;pre data-lang=&quot;json&quot; style=&quot;background-color:#2b303b;color:#c0c5ce;&quot; class=&quot;language-json &quot;&gt;&lt;code class=&quot;language-json&quot; data-lang=&quot;json&quot;&gt;&lt;span&gt;{
+&lt;&#x2F;span&gt;&lt;span&gt;    &amp;quot;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;Version&lt;&#x2F;span&gt;&lt;span&gt;&amp;quot;: &amp;quot;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;2012-10-17&lt;&#x2F;span&gt;&lt;span&gt;&amp;quot;,
+&lt;&#x2F;span&gt;&lt;span&gt;    &amp;quot;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;Statement&lt;&#x2F;span&gt;&lt;span&gt;&amp;quot;: [
+&lt;&#x2F;span&gt;&lt;span&gt;        {
+&lt;&#x2F;span&gt;&lt;span&gt;            &amp;quot;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;Effect&lt;&#x2F;span&gt;&lt;span&gt;&amp;quot;: &amp;quot;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;Allow&lt;&#x2F;span&gt;&lt;span&gt;&amp;quot;,
+&lt;&#x2F;span&gt;&lt;span&gt;            &amp;quot;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;Action&lt;&#x2F;span&gt;&lt;span&gt;&amp;quot;: &amp;quot;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;s3:*&lt;&#x2F;span&gt;&lt;span&gt;&amp;quot;,
+&lt;&#x2F;span&gt;&lt;span&gt;            &amp;quot;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;Resource&lt;&#x2F;span&gt;&lt;span&gt;&amp;quot;: [
+&lt;&#x2F;span&gt;&lt;span&gt;                &amp;quot;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;arn:aws:s3:::mybucket&#x2F;*&lt;&#x2F;span&gt;&lt;span&gt;&amp;quot;,
+&lt;&#x2F;span&gt;&lt;span&gt;                &amp;quot;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;arn:aws:s3:::mybucket&lt;&#x2F;span&gt;&lt;span&gt;&amp;quot;
+&lt;&#x2F;span&gt;&lt;span&gt;            ]
+&lt;&#x2F;span&gt;&lt;span&gt;        }
+&lt;&#x2F;span&gt;&lt;span&gt;    ]
+&lt;&#x2F;span&gt;&lt;span&gt;}
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+</content>
+	</entry>
+	<entry xml:lang="en">
+		<title>upload</title>
+		<published>2022-04-03T11:40:03+00:00</published>
+		<updated>2022-04-03T11:40:03+00:00</updated>
+		<link href="https://s3m.stream/upload/" type="text/html"/>
+		<id>https://s3m.stream/upload/</id>
+		<content type="html">&lt;p&gt;To upload a file to an s3 bucket:&lt;&#x2F;p&gt;
+&lt;pre data-lang=&quot;sh&quot; style=&quot;background-color:#2b303b;color:#c0c5ce;&quot; class=&quot;language-sh &quot;&gt;&lt;code class=&quot;language-sh&quot; data-lang=&quot;sh&quot;&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;s3m&lt;&#x2F;span&gt;&lt;span&gt; &#x2F;path_to&#x2F;file &amp;lt;s3 provider&amp;gt;&#x2F;&amp;lt;bucket&amp;gt;&#x2F;file
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;p&gt;For example if using this &lt;code&gt;~&#x2F;.s3m&#x2F;config.yml&lt;&#x2F;code&gt;:&lt;&#x2F;p&gt;
+&lt;pre data-lang=&quot;yaml&quot; style=&quot;background-color:#2b303b;color:#c0c5ce;&quot; class=&quot;language-yaml &quot;&gt;&lt;code class=&quot;language-yaml&quot; data-lang=&quot;yaml&quot;&gt;&lt;span&gt;---
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;hosts&lt;&#x2F;span&gt;&lt;span&gt;:
+&lt;&#x2F;span&gt;&lt;span&gt;  &lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;aws&lt;&#x2F;span&gt;&lt;span&gt;:
+&lt;&#x2F;span&gt;&lt;span&gt;    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;region&lt;&#x2F;span&gt;&lt;span&gt;: &lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;eu-central-1
+&lt;&#x2F;span&gt;&lt;span&gt;    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;access_key&lt;&#x2F;span&gt;&lt;span&gt;: &lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;ACCESSKEY
+&lt;&#x2F;span&gt;&lt;span&gt;    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;secret_key&lt;&#x2F;span&gt;&lt;span&gt;: &lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;SECRETKEY
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;p&gt;To upload a file to &lt;code&gt;aws&lt;&#x2F;code&gt; to a bucket named &lt;code&gt;backup&lt;&#x2F;code&gt; you could do:&lt;&#x2F;p&gt;
+&lt;pre data-lang=&quot;sh&quot; style=&quot;background-color:#2b303b;color:#c0c5ce;&quot; class=&quot;language-sh &quot;&gt;&lt;code class=&quot;language-sh&quot; data-lang=&quot;sh&quot;&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;s3m&lt;&#x2F;span&gt;&lt;span&gt; &#x2F;path&#x2F;to&#x2F;file aws&#x2F;backup&#x2F;file
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;blockquote&gt;
+&lt;p&gt;&lt;code&gt;aws&lt;&#x2F;code&gt; is the S3 provider, &lt;code&gt;backup&lt;&#x2F;code&gt; is the bucket&lt;&#x2F;p&gt;
+&lt;&#x2F;blockquote&gt;
+&lt;h2 id=&quot;pipe-stdin&quot;&gt;PIPE&#x2F;STDIN&lt;&#x2F;h2&gt;
+&lt;p&gt;You could pipe the output of your application or a file for example:&lt;&#x2F;p&gt;
+&lt;pre data-lang=&quot;sh&quot; style=&quot;background-color:#2b303b;color:#c0c5ce;&quot; class=&quot;language-sh &quot;&gt;&lt;code class=&quot;language-sh&quot; data-lang=&quot;sh&quot;&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;mysqldump &lt;&#x2F;span&gt;&lt;span&gt;| &lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;xz -c &lt;&#x2F;span&gt;&lt;span&gt;| &lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;s3m --pipe &lt;&#x2F;span&gt;&lt;span&gt;&amp;lt;s3 provider&amp;gt;&#x2F;&amp;lt;bucket&amp;gt;&#x2F;dump.sql
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;blockquote&gt;
+&lt;p&gt;The &lt;code&gt;s3 provider&lt;&#x2F;code&gt; could be &lt;code&gt;aws&lt;&#x2F;code&gt; from the previous example.&lt;&#x2F;p&gt;
+&lt;&#x2F;blockquote&gt;
+&lt;h3 id=&quot;acl&quot;&gt;ACL&lt;&#x2F;h3&gt;
+&lt;p&gt;When streaming, a &lt;a href=&quot;https:&#x2F;&#x2F;docs.aws.amazon.com&#x2F;AmazonS3&#x2F;latest&#x2F;userguide&#x2F;acl-overview.html#canned-acl&quot;&gt;canned ACL&lt;&#x2F;a&gt;
+for the object can be defined if using option &lt;code&gt;-a&#x2F;--acl &amp;lt;acl&amp;gt;&lt;&#x2F;code&gt;, for example to make the object public:&lt;&#x2F;p&gt;
+&lt;pre data-lang=&quot;sh&quot; style=&quot;background-color:#2b303b;color:#c0c5ce;&quot; class=&quot;language-sh &quot;&gt;&lt;code class=&quot;language-sh&quot; data-lang=&quot;sh&quot;&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;s3m&lt;&#x2F;span&gt;&lt;span&gt; &#x2F;path_to&#x2F;file &amp;lt;s3 provider&amp;gt;&#x2F;&amp;lt;bucket&amp;gt;&#x2F;file&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt; -a&lt;&#x2F;span&gt;&lt;span&gt; public-read
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;h3 id=&quot;metadata&quot;&gt;Metadata&lt;&#x2F;h3&gt;
+&lt;p&gt;To add a custom, user-defined object metadata &lt;code&gt;x-amz-meta-*&lt;&#x2F;code&gt;, the option &lt;code&gt;-m&#x2F;--meta&lt;&#x2F;code&gt; can be used, for example:&lt;&#x2F;p&gt;
+&lt;pre data-lang=&quot;sh&quot; style=&quot;background-color:#2b303b;color:#c0c5ce;&quot; class=&quot;language-sh &quot;&gt;&lt;code class=&quot;language-sh&quot; data-lang=&quot;sh&quot;&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;s3m&lt;&#x2F;span&gt;&lt;span&gt; &#x2F;path_to&#x2F;file &amp;lt;s3 provider&amp;gt;&#x2F;&amp;lt;bucket&amp;gt;&#x2F;file&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt; -m &lt;&#x2F;span&gt;&lt;span&gt;&amp;quot;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;key1=value1;key2=value2&lt;&#x2F;span&gt;&lt;span&gt;&amp;quot;
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;p&gt;This will create the object with the following metadata:&lt;&#x2F;p&gt;
+&lt;pre data-lang=&quot;yaml&quot; style=&quot;background-color:#2b303b;color:#c0c5ce;&quot; class=&quot;language-yaml &quot;&gt;&lt;code class=&quot;language-yaml&quot; data-lang=&quot;yaml&quot;&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;x-amz-meta-key1&lt;&#x2F;span&gt;&lt;span&gt;: &lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;value1
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;x-amz-meta-key2&lt;&#x2F;span&gt;&lt;span&gt;: &lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;value2
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+</content>
+	</entry>
+	<entry xml:lang="en">
+		<title>download</title>
+		<published>2022-04-03T11:40:02+00:00</published>
+		<updated>2022-04-03T11:40:02+00:00</updated>
+		<link href="https://s3m.stream/get/" type="text/html"/>
+		<id>https://s3m.stream/get/</id>
+		<content type="html">&lt;p&gt;To &lt;code&gt;get&lt;&#x2F;code&gt; a file&lt;&#x2F;p&gt;
+&lt;pre data-lang=&quot;sh&quot; style=&quot;background-color:#2b303b;color:#c0c5ce;&quot; class=&quot;language-sh &quot;&gt;&lt;code class=&quot;language-sh&quot; data-lang=&quot;sh&quot;&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;s3m&lt;&#x2F;span&gt;&lt;span&gt; get &#x2F;path_to&#x2F;file &amp;lt;s3 provider&amp;gt;&#x2F;&amp;lt;bucket&amp;gt;&#x2F;file
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;p&gt;If only need to retrieve the metadata from an object without downloading it, use option &lt;code&gt;-H&lt;&#x2F;code&gt;:&lt;&#x2F;p&gt;
+&lt;pre data-lang=&quot;sh&quot; style=&quot;background-color:#2b303b;color:#c0c5ce;&quot; class=&quot;language-sh &quot;&gt;&lt;code class=&quot;language-sh&quot; data-lang=&quot;sh&quot;&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;s3m&lt;&#x2F;span&gt;&lt;span&gt; get &#x2F;path_to&#x2F;file &amp;lt;s3 provider&amp;gt;&#x2F;&amp;lt;bucket&amp;gt;&#x2F;file&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt; -H
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+</content>
+	</entry>
+	<entry xml:lang="en">
+		<title>ls</title>
+		<published>2022-04-03T11:39:03+00:00</published>
+		<updated>2022-04-03T11:39:03+00:00</updated>
+		<link href="https://s3m.stream/ls/" type="text/html"/>
+		<id>https://s3m.stream/ls/</id>
+		<content type="html">&lt;p&gt;To list the content of a bucket:&lt;&#x2F;p&gt;
+&lt;pre style=&quot;background-color:#2b303b;color:#c0c5ce;&quot;&gt;&lt;code&gt;&lt;span&gt;s3m ls &amp;lt;s3 provider&amp;gt;&#x2F;&amp;lt;bucket&amp;gt;
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;p&gt;To list available buckets:&lt;&#x2F;p&gt;
+&lt;pre style=&quot;background-color:#2b303b;color:#c0c5ce;&quot;&gt;&lt;code&gt;&lt;span&gt;s3m ls &amp;lt;s3 provider&amp;gt;
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;p&gt;To list in-progress multipart uploads:&lt;&#x2F;p&gt;
+&lt;pre style=&quot;background-color:#2b303b;color:#c0c5ce;&quot;&gt;&lt;code&gt;&lt;span&gt;s3m ls &amp;lt;s3 provider&amp;gt;&#x2F;&amp;lt;bucket&amp;gt; -m&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+</content>
+	</entry>
+	<entry xml:lang="en">
+		<title>rm</title>
+		<published>2022-04-03T11:38:03+00:00</published>
+		<updated>2022-04-03T11:38:03+00:00</updated>
+		<link href="https://s3m.stream/rm/" type="text/html"/>
+		<id>https://s3m.stream/rm/</id>
+		<content type="html">&lt;p&gt;To remove an object:&lt;&#x2F;p&gt;
+&lt;pre style=&quot;background-color:#2b303b;color:#c0c5ce;&quot;&gt;&lt;code&gt;&lt;span&gt;s3m rm &amp;lt;s3 provider&amp;gt;&#x2F;&amp;lt;bucket&amp;gt;&#x2F;object
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;p&gt;To abort a multipart upload:&lt;&#x2F;p&gt;
+&lt;pre data-lang=&quot;sh&quot; style=&quot;background-color:#2b303b;color:#c0c5ce;&quot; class=&quot;language-sh &quot;&gt;&lt;code class=&quot;language-sh&quot; data-lang=&quot;sh&quot;&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;s3m&lt;&#x2F;span&gt;&lt;span&gt; rm &amp;lt;s3 provider&amp;gt;&#x2F;&amp;lt;bucket&amp;gt; -a &amp;lt;UploadId&amp;gt;
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;blockquote&gt;
+&lt;p&gt;to get the upload ID you could use &lt;code&gt;s3m ls &amp;lt;s3 provider&amp;gt;&#x2F;&amp;lt;bucket&amp;gt; -m&lt;&#x2F;code&gt;&lt;&#x2F;p&gt;
+&lt;&#x2F;blockquote&gt;
+&lt;p&gt;For example to abort all multipart uploads:&lt;&#x2F;p&gt;
+&lt;pre data-lang=&quot;sh&quot; style=&quot;background-color:#2b303b;color:#c0c5ce;&quot; class=&quot;language-sh &quot;&gt;&lt;code class=&quot;language-sh&quot; data-lang=&quot;sh&quot;&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;s3m&lt;&#x2F;span&gt;&lt;span&gt; ls&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt; -m &lt;&#x2F;span&gt;&lt;span&gt;&amp;lt;s3&amp;gt;&#x2F;&amp;lt;bucket&amp;gt; | &lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;awk &lt;&#x2F;span&gt;&lt;span&gt;&amp;#39;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;{system(&amp;quot;s3m rm &amp;lt;s3&amp;gt;&#x2F;&amp;lt;bucket&amp;gt;&#x2F;&amp;quot;$5&amp;quot; -a &amp;quot;$4);}&lt;&#x2F;span&gt;&lt;span&gt;&amp;#39;
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+</content>
+	</entry>
+	<entry xml:lang="en">
+		<title>share</title>
+		<published>2022-04-03T11:38:03+00:00</published>
+		<updated>2022-04-03T11:38:03+00:00</updated>
+		<link href="https://s3m.stream/share/" type="text/html"/>
+		<id>https://s3m.stream/share/</id>
+		<content type="html">&lt;p&gt;To share an object for 12 hours (&lt;code&gt;43200&lt;&#x2F;code&gt; seconds):&lt;&#x2F;p&gt;
+&lt;pre style=&quot;background-color:#2b303b;color:#c0c5ce;&quot;&gt;&lt;code&gt;&lt;span&gt;s3m share &amp;lt;s3 provider&amp;gt;&#x2F;&amp;lt;bucket&amp;gt;&#x2F;object
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;p&gt;The max value is 604800 (7 days)&lt;&#x2F;p&gt;
+&lt;pre data-lang=&quot;sh&quot; style=&quot;background-color:#2b303b;color:#c0c5ce;&quot; class=&quot;language-sh &quot;&gt;&lt;code class=&quot;language-sh&quot; data-lang=&quot;sh&quot;&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;s3m&lt;&#x2F;span&gt;&lt;span&gt; share &amp;lt;s3 provider&amp;gt;&#x2F;&amp;lt;bucket&amp;gt;&#x2F;object&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt; -e&lt;&#x2F;span&gt;&lt;span&gt; 604800
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+</content>
+	</entry>
+	<entry xml:lang="en">
+		<title>ACL</title>
+		<published>2022-04-03T11:37:03+00:00</published>
+		<updated>2022-04-03T11:37:03+00:00</updated>
+		<link href="https://s3m.stream/acl/" type="text/html"/>
+		<id>https://s3m.stream/acl/</id>
+		<content type="html">&lt;p&gt;If need to set or get an ACL without uplaoding a file you can use the subcomand
+&lt;code&gt;acl&lt;&#x2F;code&gt;, for example to make an object &lt;code&gt;private&lt;&#x2F;code&gt;:&lt;&#x2F;p&gt;
+&lt;pre data-lang=&quot;sh&quot; style=&quot;background-color:#2b303b;color:#c0c5ce;&quot; class=&quot;language-sh &quot;&gt;&lt;code class=&quot;language-sh&quot; data-lang=&quot;sh&quot;&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;s3m&lt;&#x2F;span&gt;&lt;span&gt; acl &amp;lt;s3 provider&amp;gt;&#x2F;&amp;lt;bucket&amp;gt;&#x2F;object&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt; -a&lt;&#x2F;span&gt;&lt;span&gt; private
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;p&gt;To retrive the existing &lt;code&gt;ACL&lt;&#x2F;code&gt;:&lt;&#x2F;p&gt;
+&lt;pre data-lang=&quot;sh&quot; style=&quot;background-color:#2b303b;color:#c0c5ce;&quot; class=&quot;language-sh &quot;&gt;&lt;code class=&quot;language-sh&quot; data-lang=&quot;sh&quot;&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;s3m&lt;&#x2F;span&gt;&lt;span&gt; acl &amp;lt;s3 provider&amp;gt;&#x2F;&amp;lt;bucket&amp;gt;&#x2F;object  | &lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;xmllint --format&lt;&#x2F;span&gt;&lt;span&gt; -
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;blockquote&gt;
+&lt;p&gt;notice the usas for xmlllint to pretty print the output&lt;&#x2F;p&gt;
+&lt;&#x2F;blockquote&gt;
+</content>
+	</entry>
+</feed>
